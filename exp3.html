@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registration Validation</title>
+  <style>
+    body { font-family: Arial; margin: 30px; }
+    input { margin: 6px 0; padding: 6px; width: 250px; }
+    button { margin-top: 10px; padding: 8px 15px; }
+  </style>
+</head>
+<body>
+  <h2>Registration Form</h2>
+  <form onsubmit="return validateForm()">
+    <input type="text" id="fname" placeholder="First Name"><br>
+    <input type="text" id="lname" placeholder="Last Name"><br>
+    <input type="password" id="password" placeholder="Password"><br>
+    <input type="email" id="email" placeholder="Email"><br>
+    <input type="text" id="mobile" placeholder="Mobile Number"><br>
+    <input type="text" id="address" placeholder="Address"><br>
+    <button type="submit">Register</button>
+  </form>
+
+  <script>
+    function validateForm() {
+      const fname = document.getElementById("fname").value.trim();
+      const lname = document.getElementById("lname").value.trim();
+      const password = document.getElementById("password").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const mobile = document.getElementById("mobile").value.trim();
+      const address = document.getElementById("address").value.trim();
+
+      // 1) First name validation
+      const namePattern = /^[A-Za-z]+$/;
+      if (!namePattern.test(fname) || fname.length < 6) {
+        alert("First name must contain only alphabets and at least 6 characters.");
+        return false;
+      }
+
+      // 2) Password validation
+      if (password.length < 6) {
+        alert("Password must be at least 6 characters long.");
+        return false;
+      }
+
+      // 3) Email validation
+      const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,}$/;
+      if (!emailPattern.test(email)) {
+        alert("Please enter a valid email address (e.g., name@domain.com).");
+        return false;
+      }
+
+      // 4) Mobile number validation
+      const mobilePattern = /^[0-9]{10}$/;
+      if (!mobilePattern.test(mobile)) {
+        alert("Mobile number must contain exactly 10 digits.");
+        return false;
+      }
+
+      // 5) Last name & address validation
+      if (lname === "") {
+        alert("Last name cannot be empty.");
+        return false;
+      }
+      if (address === "") {
+        alert("Address cannot be empty.");
+        return false;
+      }
+
+      alert("Registration Successful!");
+      return true;
+    }
+  </script>
+</body>
+</html>
